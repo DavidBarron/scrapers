@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup
 
 
 url = "http://www.dallascowboys.com/team/roster"
-r = requests.get(url)
+url2 = "http://www.philadelphiaeagles.com/team/roster.html"
+r = requests.get(url2)
 #print(type(r))
 #print(type(r.content))
 soup = BeautifulSoup(r.content)
@@ -13,7 +14,7 @@ soup = BeautifulSoup(r.content)
 #    print (link)
 
 name = "NA"
-team = "Dallas Cowboys"
+team = "Philadelphia Eagles"
 number = "NA"
 college = "NA"
 exp = "NA"

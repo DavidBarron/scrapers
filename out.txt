@@ -1,3 +1,0 @@
-<class 'requests.models.Response'>
-<class 'bytes'>
-<a class="player" data-player-college="Bentley" data-player-experience="8" data-player-height="6-4" data-player-image="/sites/dallascowboys.com/files/styles/player_hover/public/ber180672_9.png?itok=HU2EVsLS" data-player-position="G" data-player-weight="322" href="/team/players/roster/mackenzy-bernadeau">Bernadeau, Mackenzy</a>
