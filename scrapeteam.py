@@ -1,14 +1,11 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 
 url = "http://espn.go.com/nfl/team/roster/_/name/dal/dallas-cowboys"
 r = requests.get(url)
 
 soup = BeautifulSoup(r.content)
-#links = soup.find_all("a")
-
-#for link in links
-#    print (link)
 
 name = "NA"
 team = "Dallas Cowboys"
@@ -19,8 +16,9 @@ height = "NA"
 weight = "NA"
 image = "NA"
 
-data = soup.find_all("tr", {"class" : "oddrow player-28-5209"})
-print(data)    
+#data = soup.find_all("tr", {"class" : "oddrow player-28-5209"})
+data = soup.find_all("tr", class_=re.compile("player-28"))
+#print(data)    
 #print(type(player_data))
 
 for item in data :
