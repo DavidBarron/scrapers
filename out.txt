@@ -86,7 +86,7 @@
 <td>250</td>
 <td>5</td>
 <td>Fresno State</td>
-<td>--</td>
+<td>48</td>
 <td><a href="http://espn.go.com/nfl/player/_/id/17326/j.c.-copeland">J.C. Copeland</a></td>
 <td>FB</td>
 <td>23</td>
