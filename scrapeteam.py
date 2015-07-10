@@ -61,6 +61,13 @@ for player in data :
                 player_url = thing.get("href")
                 name = thing.contents[0]
                 print (name)
-            #pdata = bad_soup.find_all("div", {"class" : "main-headshot"})   # look for player photo
+                r2 = requests.get(player_url)
+                nasty_soup = BeautifulSoup(r2.content)
+                pdata = nasty_soup.find_all("div", {"class" : "main-headshot"})   # look for player photo
+                image_url = str(pdata).split("\"")
+                try :
+                    print( image_url[5].split("&")[0])
+                except IndexError:
+                    print ("http://capstone.cryotek.org/img/team/empty-compressed.png")
         else :   # data is already good to go
             print (attribute[0])
