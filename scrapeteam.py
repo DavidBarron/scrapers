@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 url = "http://espn.go.com/nfl/team/roster/_/name/dal/dallas-cowboys"
 urls = {
         "Arizona Cardinals" : "http://espn.go.com/nfl/team/roster/_/name/ari/arizona-cardinals",
-        "Atlanta Falsons" : "http://espn.go.com/nfl/team/roster/_/name/atl/atlanta-falcons",
+        "Atlanta Falcons" : "http://espn.go.com/nfl/team/roster/_/name/atl/atlanta-falcons",
         "Baltimore Ravens" : "http://espn.go.com/nfl/team/roster/_/name/bal/baltimore-ravens",
         "Buffalo Bills" : "http://espn.go.com/nfl/team/roster/_/name/buf/buffalo-bills",
         "Carolina Panthers" : "http://espn.go.com/nfl/team/roster/_/name/car/carolina-panthers",
@@ -50,12 +50,9 @@ height = "NA"
 weight = "NA"
 image = "NA"
 
-data = soup.find_all("tr", class_=re.compile("player-28"))
-#print(data)    
-#print(type(player_data))
+data = soup.find_all("tr", class_=re.compile("player-28"))   # find all player info
 
-for item in data :
-    #print (item.contents[0])
-    for contents in item :
-        print (contents)
-    #soup2 = BeautifulSoup(item.contents[1])
+for player in data :
+    for attribute in player :
+        attribute = attribute.contents
+        print (attribute[0])
