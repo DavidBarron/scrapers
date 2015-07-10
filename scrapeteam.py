@@ -54,5 +54,13 @@ data = soup.find_all("tr", class_=re.compile("player-28"))   # find all player i
 
 for player in data :
     for attribute in player :
-        attribute = attribute.contents
-        print (attribute[0])
+        attribute = attribute.contents   # get data from tags
+        if "<" in str(attribute) :   # we need to get player name and image
+            bad_soup = BeautifulSoup(str(attribute))
+            for thing in bad_soup.find_all("a") :
+                player_url = thing.get("href")
+                name = thing.contents[0]
+                print (name)
+            #pdata = bad_soup.find_all("div", {"class" : "main-headshot"})   # look for player photo
+        else :   # data is already good to go
+            print (attribute[0])
