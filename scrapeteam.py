@@ -2,7 +2,6 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-url = "http://espn.go.com/nfl/team/roster/_/name/dal/dallas-cowboys"
 urls = {
         "Arizona Cardinals" : "http://espn.go.com/nfl/team/roster/_/name/ari/arizona-cardinals",
         "Atlanta Falcons" : "http://espn.go.com/nfl/team/roster/_/name/atl/atlanta-falcons",
@@ -37,37 +36,41 @@ urls = {
         "Tennessee Titans" : "http://espn.go.com/nfl/team/roster/_/name/ten/tennessee-titans",
         "Washington Redskins" : "http://espn.go.com/nfl/team/roster/_/name/wsh/washington-redskins"
         }
-r = requests.get(url)
 
-soup = BeautifulSoup(r.content)
+for dteam,url in urls.items() :
 
-name = "NA"
-team = "Dallas Cowboys"
-number = "NA"
-college = "NA"
-exp = "NA"
-height = "NA"
-weight = "NA"
-image = "NA"
+    name = "NA"
+    team = dteam
+    number = "NA"
+    college = "NA"
+    exp = "NA"
+    height = "NA"
+    weight = "NA"
+    image = "NA"
+    
+    r = requests.get(url)
 
-data = soup.find_all("tr", class_=re.compile("player-28"))   # find all player info
+    soup = BeautifulSoup(r.content)
 
-for player in data :
-    for attribute in player :
-        attribute = attribute.contents   # get data from tags
-        if "<" in str(attribute) :   # we need to get player name and image
-            bad_soup = BeautifulSoup(str(attribute))
-            for thing in bad_soup.find_all("a") :
-                player_url = thing.get("href")
-                name = thing.contents[0]
-                print (name)
-                r2 = requests.get(player_url)
-                nasty_soup = BeautifulSoup(r2.content)
-                pdata = nasty_soup.find_all("div", {"class" : "main-headshot"})   # look for player photo
-                image_url = str(pdata).split("\"")
-                try :
-                    print( image_url[5].split("&")[0])
-                except IndexError:
-                    print ("http://capstone.cryotek.org/img/team/empty-compressed.png")
-        else :   # data is already good to go
-            print (attribute[0])
+    data = soup.find_all("tr", class_=re.compile("player-28"))   # find all player info
+
+    for player in data :
+        print(dteam)
+        for attribute in player :
+            attribute = attribute.contents   # get data from tags
+            if "<" in str(attribute) :   # we need to get player name and image
+                bad_soup = BeautifulSoup(str(attribute))
+                for thing in bad_soup.find_all("a") :
+                    player_url = thing.get("href")
+                    name = thing.contents[0]
+                    print (name)
+                    r2 = requests.get(player_url)
+                    nasty_soup = BeautifulSoup(r2.content)
+                    pdata = nasty_soup.find_all("div", {"class" : "main-headshot"})   # look for player photo
+                    image_url = str(pdata).split("\"")
+                    try :
+                        print( image_url[5].split("&")[0])
+                    except IndexError:
+                        print ("http://capstone.cryotek.org/img/team/empty-compressed.png")
+            else :   # data is already good to go
+                print (attribute[0])
